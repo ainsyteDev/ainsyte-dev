@@ -24,16 +24,17 @@ function populateQuestions(testInput, index) {
 
 //## Debug logging ## Uncomment to see in console. 
 //  console.log(); //
+    console.log(index); //Write the current question numnber to the console.
 //  console.log(Object.keys(testInput).length); //Write total number of questions found in the current test to the console.
 //  console.log(testInput); //Write the current tests object to the console.
-//  console.log(testInput[index].split('\t')[0]); //Write the current question to the console.
-//  console.log(testInput[index].split('\t')[1]); //Write the current answer options to the console.
+//  console.log(testInput[index].split('|')[0]); //Write the current question to the console.
+//  console.log(testInput[index].split('|')[1]); //Write the current answer options to the console.
 
   //Populate question text, index 0 after splitting by tab delineation.
-  document.getElementById("currentQuestion").innerHTML = testInput[index].split('\t')[0];
+  document.getElementById("currentQuestion").innerHTML = testInput[index].split('|')[0];
 
   //Get the number of answers associated with the indexed quesiton to decide how many answer options to display.
-  let numberOfAnswerOptions = testInput[index].split('\t')[1].split(',').length;
+  let numberOfAnswerOptions = testInput[index].split('|')[1].split(',').length;
 
   //Create an object of the answer button options using the class name answerOptions. 
   let answerOptionButtons = document.getElementsByClassName("answerOptions");
@@ -55,8 +56,8 @@ function populateQuestions(testInput, index) {
 
     //Providing any other N<=4 will display each answer as a button and the free-form text box. 
     case 2:
-      answerOptionButtons[0].innerText = testInput[index].split('\t')[1].split(',')[0];
-      answerOptionButtons[1].innerText = testInput[index].split('\t')[1].split(',')[1];
+      answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
+      answerOptionButtons[1].innerText = testInput[index].split('|')[1].split(',')[1];
       answerOptionButtons[2].innerText = "";
       answerOptionButtons[3].innerText = "";
       answerOptionButtons[0].style.display = 'inline';
@@ -65,9 +66,9 @@ function populateQuestions(testInput, index) {
       answerOptionButtons[3].style.display = 'none';
       break;
     case 3:
-      answerOptionButtons[0].innerText = testInput[index].split('\t')[1].split(',')[0];
-      answerOptionButtons[1].innerText = testInput[index].split('\t')[1].split(',')[1];
-      answerOptionButtons[2].innerText = testInput[index].split('\t')[1].split(',')[2];
+      answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
+      answerOptionButtons[1].innerText = testInput[index].split('|')[1].split(',')[1];
+      answerOptionButtons[2].innerText = testInput[index].split('|')[1].split(',')[2];
       answerOptionButtons[3].innerText = "";
       answerOptionButtons[0].style.display = 'inline';
       answerOptionButtons[1].style.display = 'inline';
@@ -75,10 +76,10 @@ function populateQuestions(testInput, index) {
       answerOptionButtons[3].style.display = 'none';
       break;
     case 4:
-      answerOptionButtons[0].innerText = testInput[index].split('\t')[1].split(',')[0];
-      answerOptionButtons[1].innerText = testInput[index].split('\t')[1].split(',')[1];
-      answerOptionButtons[2].innerText = testInput[index].split('\t')[1].split(',')[2];
-      answerOptionButtons[3].innerText = testInput[index].split('\t')[1].split(',')[3];
+      answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
+      answerOptionButtons[1].innerText = testInput[index].split('|')[1].split(',')[1];
+      answerOptionButtons[2].innerText = testInput[index].split('|')[1].split(',')[2];
+      answerOptionButtons[3].innerText = testInput[index].split('|')[1].split(',')[3];
       answerOptionButtons[0].style.display = 'inline';
       answerOptionButtons[1].style.display = 'inline';
       answerOptionButtons[2].style.display = 'inline';
