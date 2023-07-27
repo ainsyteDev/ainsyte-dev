@@ -1,0 +1,14 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+section.gh-content p{
+  display: none;
+}
+section.gh-content div#answerBlock button.answerOptions{
+  display: none;
+}
+section.gh-content textArea#answerText{
+  border: 2px solid black;
+}

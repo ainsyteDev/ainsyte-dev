@@ -1,0 +1,67 @@
+1	Do you prefer social interaction or introspection?	Social interaction	Introspection		
+2	Choose the two words that best describe you in social settings:	Reserved	Outgoing	Relaxed	Anxious
+3	How do you feel about being the centre of attention in social situations?	Like	Dislike		
+4	Do you get along well with others?	Yes	No		
+5	Can you adapt to different social situations?	Yes	No		
+6	Are you considerate of others?	Yes	No		
+7	Are you willing to accommodate others in relationships?	Yes	No		
+8	Which word better describes you in group settings?	Dominant	Submissive		
+9	Are you comfortable initiating conversations and interactions?	Yes	No		
+10	Which word better describes your communication style?	Assertive	Reserved		
+11	Do you rely more on your senses or your intuition?	Senses	Intuition		
+12	Are you responsive to the emotions and needs of other people?	Yes	No		
+13	It it important for you to be included and involved in social activities and group settings?	Yes	No		
+14	Are you comfortable with expressing affection and warmth towards others?	Yes	No		
+15	Choose the two that you value most:	Accuracy	Attention to detail	Results	Big picture thinking
+16	Choose the two that you value most:	Objective analysis	Impact on others	Fairness	Harmony
+17	Choose the two that you value most:	Justice	Empathy	Harmony	Assertiveness
+18	Choose the two that you value most:	Peace	Self expression	Avoiding conflict	Pursuing your goals
+19	Do facts or emotions take higher priority when giving feedback to others?	Facts	Emotions		
+20	Choose the two words that best describe how you approach work and life:	Stability	Flexibility	Consistency	Variety
+21	Do you follow traditional beliefs?	Yes	No		
+22	Do you handle emotions with ease?	Yes	No		
+23	Do you handle stress with ease?	Yes	No		
+24	When you work with others, do you prefer to take charge and lead or support and collaborate?	Take Charge and Lead	Support and Collaborate		
+25	Do you prefer to work independently or with a team?	Independent	With a team		
+26	Choose the two words that best describe your preferred work environment:	Fast-paced	Calm	Dynamic	Stable
+27	Do you enjoy working with data, numbers, and detailed information in structured environments?	Yes	No		
+28	Do you enjoy following step-by-step instructions and working with concrete information?	Yes	No		
+29	 it important for you to have work-life balance and maintain a sense of well-being?	Yes	No		
+30	Choose the two that best describe what you focus on:	My own needs	Needs of others	Security	Freedom
+31	Choose the two that best describe what you focus on:	Structure	Adapting	Control	Going with the flow
+32	Choose the two that best describe what drives you:	Recognition	Avoiding conflict	Achievement	Inner peace
+33	Choose the two that best describe your motivation:	Uniqueness	Stability	Emotional depth	Belonging
+34	Choose the two that best describe your motivation:	Power	Justice	Control	Truth
+35	Choose the two that best describe your motivation:	Protection of self and others	Standing up for the underdog	Financial reward	Personal fulfillment
+36	Choose the two that best describe your motivation:	Personal gains	Make a positive impact on society	Recognition	Satisfaction
+37	Choose the two that best describe what you seek in life:	Knowledge	Independence	Connection	Close relationships
+38	Choose the two that best describe your priorities:	Fun	Caution	Spontaneity	Responsible
+39	Do you handle criticism and feedback from others well?	Yes	No		
+40	Choose the two that best describes you:	Risk taker	Predictable	Impulsive	Careful
+41	Choose the two that best describes you:	Task oriented	Relationship oriented	Humble	Confident
+42	Choose the two that best describes you:	Modest	Self assured	Results focused	Interpersonal dynamics focused
+43	Choose the two that best describes your mindset:	Optimistic	Skeptical	Hopeful	Worried
+44	What skills or abilities do you believe set you apart from others?				
+45	Choose the two that best describes your approach to challenges and problem solving:	Careful analysis and planning	Adapt and improvise	Established procedures	Creative solutions
+46	Are you comfortable taking risks and making quick decisions?	Yes	No		
+47	Are you able to easily adjust your communication style to meet the needs of others?	Yes	No		
+48	Choose the two concepts that you prefer best:	Clear deadlines	Open ended possibilities	Decisive choices	Strategizing
+49	Are you able to ability plan, organize, and complete tasks and responsibilities in a timely manner?	Yes	No		
+50	What activities or tasks make you feel energized and engaged?				
+51	What activities or tasks make you feel disengaged and drain your energy?				
+52	Do you spend more time thinking of the past, present or future?	Past	Present	Future	
+53	Which best describes your approach to decision making?	Logical/objective	Personal values		
+54	Choose the two that best describes your preferences in daily life:	Routine	Variety	Stability	Adaptability
+55	Choose the two that best describes your thinking style:	Analytical	Intuitive	Sequential	Holistic
+56	Choose the two that best describes your thinking style:	Logical	Imaginative	Linear	Non-linear
+57	Are you generally more relaxed or more tense?	Relaxed	Tense		
+58	Choose the two words that best describe your approach to sharing personal information:	Private	Open	Reserved	Expressive
+59	Choose the two words that best describe your approach to life:	Pragmatic	Visionary	Practical	Idealistic
+60	Which word better describes how you express your opinions and ideas?	Assertive	Passive		
+61	Do you find it challenging to trust others or feel suspicious of their motives?	Yes	No		
+62	Do you tend to focus on gathering concrete facts and details before forming opinions?	Yes	No		
+63	Do you have a passion for expressing yourself creatively through art, music, or other forms of artistic expression?	Yes	No		
+64	Do you enjoy engaging in persuasive and influential communication to achieve your goals?	Yes	No		
+65	Do you perceive and understand your own emotions? Are you aware of how your emotions influence your thoughts, behaviours, and decision-making processes?	Yes	No		
+66	Can you accurately identify and interpret the emotions expressed by others through their facial expressions, tone of voice, and body language?	Yes	No		
+67	Are you able to motivate yourself and stay resilient in the face of setbacks or obstacles?	Yes	No		

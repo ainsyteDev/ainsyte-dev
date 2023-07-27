@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Personality Inventory</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="quiz.js" defer></script>
+  </head>
+  <body>
+    <section class="gh-content">
+      <div id="currentQuestion">Question placeholder, if you see this, something is wrong.</div>
+        <div id="answerBlock">
+          <button class="answerOptions" id="option-1" type="button">Option One</button>
+          <button class="answerOptions" id="option-2" type="button">Option Two</button>
+          <button class="answerOptions" id="option-3" type="button">Option Three</button>
+          <button class="answerOptions" id="option-4" type="button">Option Four</button>
+        </div>
+        <textArea id="answerText" rows="6" cols="80"></textArea>
+        <div id="testControlBlock">
+          <button class="testControlButton" id="previousQuestion" type="button" onclick="moveToPreviousQuestion()">Previous</button>
+          <button class="testControlButton" id="nextQuestion" type="button" onclick="moveToNextQuestion()">Next</button>
+        </div>
+      <p>Do you prefer social interaction or introspection?	Social Interaction,Introspection</p>
+      <p>Choose the two words that best describe you in social settings:	Reserved,Outgoing,Relaxed,Anxious</p>
+      <p>How do you feel about being the centre of attention in social situations?	Like,Dislike</p>
+      <p>Do you get along well with others?	Yes,No</p>
+      <p>Can you adapt to different social situations?	Yes,No</p>
+      <p>Are you considerate of others?	freeform</p>
+    </section>
+  </body>
+</html>
