@@ -24,11 +24,11 @@ function populateQuestions(testInput, index) {
 
 //## Debug logging ## Uncomment to see in console. 
 //  console.log(); //
-    console.log(index); //Write the current question numnber to the console.
-//  console.log(Object.keys(testInput).length); //Write total number of questions found in the current test to the console.
-//  console.log(testInput); //Write the current tests object to the console.
-//  console.log(testInput[index].split('|')[0]); //Write the current question to the console.
-//  console.log(testInput[index].split('|')[1]); //Write the current answer options to the console.
+    console.log("Question Number:" + index); //Write the current question numnber to the console.
+    console.log("Total Questions in Current Test:" + Object.keys(testInput).length); //Write total number of questions found in the current test to the console.
+    console.log("Current Question:" + testInput[index].split('|')[0]); //Write the current question text to the console.
+    console.log("Current Answer Options:" + testInput[index].split('|')[1]); //Write the current answer options to the console.
+    console.log(testInput); //Write the current tests object to the console.
 
   //Populate question text, index 0 after splitting by tab delineation.
   document.getElementById("currentQuestion").innerHTML = testInput[index].split('|')[0];
