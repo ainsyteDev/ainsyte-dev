@@ -30,7 +30,7 @@ function populateQuestions(testInput, index) {
     console.log("Current Answer Options:" + testInput[index].split('|')[1]); //Write the current answer options to the console.
 //    console.log(testInput); //Write the current tests object to the console.
 
-  //Populate question text, index 0 after splitting by tab delineation.
+  //Populate question text, index 0 after splitting by pipe delineation.
   document.getElementById("currentQuestion").innerHTML = testInput[index].split('|')[0];
 
   //Get the number of answers associated with the indexed quesiton to decide how many answer options to display.
@@ -48,10 +48,10 @@ function populateQuestions(testInput, index) {
       answerOptionButtons[1].innerText = "";
       answerOptionButtons[2].innerText = "";
       answerOptionButtons[3].innerText = "";
-      answerOptionButtons[0].style.display = 'none';
-      answerOptionButtons[1].style.display = 'none';
-      answerOptionButtons[2].style.display = 'none';
-      answerOptionButtons[3].style.display = 'none';
+      answerOptionButtons[0].style.display = 'hidden';
+      answerOptionButtons[1].style.display = 'hidden';
+      answerOptionButtons[2].style.display = 'hidden';
+      answerOptionButtons[3].style.display = 'hidden';
       break;
 
     //Providing any other N<=4 will display each answer as a button and the free-form text box. 
@@ -62,8 +62,8 @@ function populateQuestions(testInput, index) {
       answerOptionButtons[3].innerText = "";
       answerOptionButtons[0].style.display = 'inline';
       answerOptionButtons[1].style.display = 'inline';
-      answerOptionButtons[2].style.display = 'none';
-      answerOptionButtons[3].style.display = 'none';
+      answerOptionButtons[2].style.display = 'hidden';
+      answerOptionButtons[3].style.display = 'hidden';
       break;
     case 3:
       answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
@@ -73,7 +73,7 @@ function populateQuestions(testInput, index) {
       answerOptionButtons[0].style.display = 'inline';
       answerOptionButtons[1].style.display = 'inline';
       answerOptionButtons[2].style.display = 'inline';
-      answerOptionButtons[3].style.display = 'none';
+      answerOptionButtons[3].style.display = 'hidden';
       break;
     case 4:
       answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
@@ -92,10 +92,10 @@ function populateQuestions(testInput, index) {
       answerOptionButtons[1].innerText = "";
       answerOptionButtons[2].innerText = "";
       answerOptionButtons[3].innerText = "";
-      answerOptionButtons[0].style.display = 'none';
-      answerOptionButtons[1].style.display = 'none';
-      answerOptionButtons[2].style.display = 'none';
-      answerOptionButtons[3].style.display = 'none';
+      answerOptionButtons[0].style.display = 'hidden';
+      answerOptionButtons[1].style.display = 'hidden';
+      answerOptionButtons[2].style.display = 'hidden';
+      answerOptionButtons[3].style.display = 'hidden';
   }
 
   //Address special case of the first question where you should not be able to move back by disabling the Previous button.
