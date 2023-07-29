@@ -24,10 +24,10 @@ function populateQuestions(testInput, index) {
 
 //## Debug logging ## Uncomment to see in console. 
 //  console.log(); //
-    console.log("Question Number:" + index); //Write the current question numnber to the console.
-    console.log("Total Questions in Current Test:" + Object.keys(testInput).length); //Write total number of questions found in the current test to the console.
-    console.log("Current Question:" + testInput[index].split('|')[0]); //Write the current question text to the console.
-    console.log("Current Answer Options:" + testInput[index].split('|')[1]); //Write the current answer options to the console.
+//    console.log("Question Number:" + index); //Write the current question numnber to the console.
+//    console.log("Total Questions in Current Test:" + Object.keys(testInput).length); //Write total number of questions found in the current test to the console.
+//    console.log("Current Question:" + testInput[index].split('|')[0]); //Write the current question text to the console.
+//    console.log("Current Answer Options:" + testInput[index].split('|')[1]); //Write the current answer options to the console.
 //    console.log(testInput); //Write the current tests object to the console.
 
   //Populate question text, index 0 after splitting by pipe delineation.
@@ -36,66 +36,114 @@ function populateQuestions(testInput, index) {
   //Get the number of answers associated with the indexed quesiton to decide how many answer options to display.
   let numberOfAnswerOptions = testInput[index].split('|')[1].split(',').length;
 
-  //Create an object of the answer button options using the class name answerOptions. 
-  let answerOptionButtons = document.getElementsByClassName("answerOptions");
+  //Create an object of the answer check box options using the class name answerOptions. 
+  let answerOptionBoxes = document.getElementsByClassName("answerOptions");
+
+  //create an object of the anser check box label options using the class name answerOptions-label.
+  let answerOptionLabels = document.getElementsByClassName("answerOptions-label");
 
   //Toggle answer options based off the number available, must be at least one option, in which case it is assumed that the answer should be free-form text.
   switch(numberOfAnswerOptions) {
 
     //Providing a single answer option (cannot be 0 for now, will update) is equivalent to providing only free-form text as an answer.
     case 1:
-      answerOptionButtons[0].innerText = "";
-      answerOptionButtons[1].innerText = "";
-      answerOptionButtons[2].innerText = "";
-      answerOptionButtons[3].innerText = "";
-      answerOptionButtons[0].style.display = 'hidden';
-      answerOptionButtons[1].style.display = 'hidden';
-      answerOptionButtons[2].style.display = 'hidden';
-      answerOptionButtons[3].style.display = 'hidden';
+      answerOptionBoxes[0].value = "";
+      answerOptionBoxes[1].value = "";
+      answerOptionBoxes[2].value = "";
+      answerOptionBoxes[3].value = "";
+      answerOptionBoxes[0].style.visibility = 'hidden';
+      answerOptionBoxes[1].style.visibility = 'hidden';
+      answerOptionBoxes[2].style.visibility = 'hidden';
+      answerOptionBoxes[3].style.visibility = 'hidden';
+
+      answerOptionLabels[0].innerText = "";
+      answerOptionLabels[1].innerText = "";
+      answerOptionLabels[2].innerText = "";
+      answerOptionLabels[3].innerText = "";
+      answerOptionLabels[0].style.visibility = 'hidden';
+      answerOptionLabels[1].style.visibility = 'hidden';
+      answerOptionLabels[2].style.visibility = 'hidden';
+      answerOptionLabels[3].style.visibility = 'hidden';
       break;
 
     //Providing any other N<=4 will display each answer as a button and the free-form text box. 
     case 2:
-      answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
-      answerOptionButtons[1].innerText = testInput[index].split('|')[1].split(',')[1];
-      answerOptionButtons[2].innerText = "";
-      answerOptionButtons[3].innerText = "";
-      answerOptionButtons[0].style.display = 'inline';
-      answerOptionButtons[1].style.display = 'inline';
-      answerOptionButtons[2].style.display = 'hidden';
-      answerOptionButtons[3].style.display = 'hidden';
+      answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
+      answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
+      answerOptionBoxes[2].value = "";
+      answerOptionBoxes[3].value = "";
+      answerOptionBoxes[0].style.visibility = 'visible';
+      answerOptionBoxes[1].style.visibility = 'visible';
+      answerOptionBoxes[2].style.visibility = 'hidden';
+      answerOptionBoxes[3].style.visibility = 'hidden';
+
+      answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
+      answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
+      answerOptionLabels[2].innerText = "";
+      answerOptionLabels[3].innerText = "";
+      answerOptionLabels[0].style.visibility = 'visible';
+      answerOptionLabels[1].style.visibility = 'visible';
+      answerOptionLabels[2].style.visibility = 'hidden';
+      answerOptionLabels[3].style.visibility = 'hidden';
       break;
     case 3:
-      answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
-      answerOptionButtons[1].innerText = testInput[index].split('|')[1].split(',')[1];
-      answerOptionButtons[2].innerText = testInput[index].split('|')[1].split(',')[2];
-      answerOptionButtons[3].innerText = "";
-      answerOptionButtons[0].style.display = 'inline';
-      answerOptionButtons[1].style.display = 'inline';
-      answerOptionButtons[2].style.display = 'inline';
-      answerOptionButtons[3].style.display = 'hidden';
+      answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
+      answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
+      answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
+      answerOptionBoxes[3].value = "";
+      answerOptionBoxes[0].style.visibility = 'visible';
+      answerOptionBoxes[1].style.visibility = 'visible';
+      answerOptionBoxes[2].style.visibility = 'visible';
+      answerOptionBoxes[3].style.visibility = 'hidden';
+
+      answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
+      answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
+      answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
+      answerOptionLabels[3].innerText = "";
+      answerOptionLabels[0].style.visibility = 'visible';
+      answerOptionLabels[1].style.visibility = 'visible';
+      answerOptionLabels[2].style.visibility = 'visible';
+      answerOptionLabels[3].style.visibility = 'hidden';
       break;
     case 4:
-      answerOptionButtons[0].innerText = testInput[index].split('|')[1].split(',')[0];
-      answerOptionButtons[1].innerText = testInput[index].split('|')[1].split(',')[1];
-      answerOptionButtons[2].innerText = testInput[index].split('|')[1].split(',')[2];
-      answerOptionButtons[3].innerText = testInput[index].split('|')[1].split(',')[3];
-      answerOptionButtons[0].style.display = 'inline';
-      answerOptionButtons[1].style.display = 'inline';
-      answerOptionButtons[2].style.display = 'inline';
-      answerOptionButtons[3].style.display = 'inline';
+      answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
+      answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
+      answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
+      answerOptionBoxes[3].value = testInput[index].split('|')[1].split(',')[3];
+      answerOptionBoxes[0].style.visibility = 'visible';
+      answerOptionBoxes[1].style.visibility = 'visible';
+      answerOptionBoxes[2].style.visibility = 'visible';
+      answerOptionBoxes[3].style.visibility = 'visible';
+
+      answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
+      answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
+      answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
+      answerOptionLabels[3].innerText = testInput[index].split('|')[1].split(',')[3];
+      answerOptionLabels[0].style.visibility = 'visible';
+      answerOptionLabels[1].style.visibility = 'visible';
+      answerOptionLabels[2].style.visibility = 'visible';
+      answerOptionLabels[3].style.visibility = 'visible';
       break;
 
     //Default behavior is to show no buttons and only free-form text input. This would only be in case of error.
     default:
-      answerOptionButtons[0].innerText = "";
-      answerOptionButtons[1].innerText = "";
-      answerOptionButtons[2].innerText = "";
-      answerOptionButtons[3].innerText = "";
-      answerOptionButtons[0].style.display = 'hidden';
-      answerOptionButtons[1].style.display = 'hidden';
-      answerOptionButtons[2].style.display = 'hidden';
-      answerOptionButtons[3].style.display = 'hidden';
+      answerOptionBoxes[0].value = "";
+      answerOptionBoxes[1].value = "";
+      answerOptionBoxes[2].value = "";
+      answerOptionBoxes[3].value = "";
+      answerOptionBoxes[0].style.visibility = 'hidden';
+      answerOptionBoxes[1].style.visibility = 'hidden';
+      answerOptionBoxes[2].style.visibility = 'hidden';
+      answerOptionBoxes[3].style.visibility = 'hidden';
+
+      answerOptionLabels[0].innerText = "";
+      answerOptionLabels[1].innerText = "";
+      answerOptionLabels[2].innerText = "";
+      answerOptionLabels[3].innerText = "";
+      answerOptionLabels[0].style.visibility = 'visible';
+      answerOptionLabels[1].style.visibility = 'visible';
+      answerOptionLabels[2].style.visibility = 'hidden';
+      answerOptionLabels[3].style.visibility = 'hidden';
   }
 
   //Address special case of the first question where you should not be able to move back by disabling the Previous button.
