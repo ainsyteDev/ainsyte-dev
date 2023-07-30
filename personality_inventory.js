@@ -55,7 +55,7 @@ function populateQuestions(testInput, index) {
       answerOptionBoxes[1].style.visibility = 'hidden';
       answerOptionBoxes[2].style.visibility = 'hidden';
       answerOptionBoxes[3].style.visibility = 'hidden';
-
+      //update labels
       answerOptionLabels[0].innerText = "";
       answerOptionLabels[1].innerText = "";
       answerOptionLabels[2].innerText = "";
@@ -68,6 +68,7 @@ function populateQuestions(testInput, index) {
 
     //Providing any other N<=4 will display each answer as a button and the free-form text box. 
     case 2:
+      //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
       answerOptionBoxes[2].value = "";
@@ -76,7 +77,7 @@ function populateQuestions(testInput, index) {
       answerOptionBoxes[1].style.visibility = 'visible';
       answerOptionBoxes[2].style.visibility = 'hidden';
       answerOptionBoxes[3].style.visibility = 'hidden';
-
+      //update labels
       answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
       answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
       answerOptionLabels[2].innerText = "";
@@ -86,7 +87,9 @@ function populateQuestions(testInput, index) {
       answerOptionLabels[2].style.visibility = 'hidden';
       answerOptionLabels[3].style.visibility = 'hidden';
       break;
+
     case 3:
+      //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
       answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
@@ -95,7 +98,7 @@ function populateQuestions(testInput, index) {
       answerOptionBoxes[1].style.visibility = 'visible';
       answerOptionBoxes[2].style.visibility = 'visible';
       answerOptionBoxes[3].style.visibility = 'hidden';
-
+      //update labels
       answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
       answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
       answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
@@ -105,7 +108,9 @@ function populateQuestions(testInput, index) {
       answerOptionLabels[2].style.visibility = 'visible';
       answerOptionLabels[3].style.visibility = 'hidden';
       break;
+
     case 4:
+      //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
       answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
@@ -114,7 +119,7 @@ function populateQuestions(testInput, index) {
       answerOptionBoxes[1].style.visibility = 'visible';
       answerOptionBoxes[2].style.visibility = 'visible';
       answerOptionBoxes[3].style.visibility = 'visible';
-
+      //Update labels.
       answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
       answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
       answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
@@ -127,6 +132,7 @@ function populateQuestions(testInput, index) {
 
     //Default behavior is to show no buttons and only free-form text input. This would only be in case of error.
     default:
+      //Update checkboxes.
       answerOptionBoxes[0].value = "";
       answerOptionBoxes[1].value = "";
       answerOptionBoxes[2].value = "";
@@ -135,7 +141,7 @@ function populateQuestions(testInput, index) {
       answerOptionBoxes[1].style.visibility = 'hidden';
       answerOptionBoxes[2].style.visibility = 'hidden';
       answerOptionBoxes[3].style.visibility = 'hidden';
-
+      //Update labels.
       answerOptionLabels[0].innerText = "";
       answerOptionLabels[1].innerText = "";
       answerOptionLabels[2].innerText = "";
@@ -147,7 +153,7 @@ function populateQuestions(testInput, index) {
   }
 
   //Address special case of the first question where you should not be able to move back by disabling the Previous button.
-  if(currentQuesitonNumber == 1){
+  if(currentQuestionNumber == 1){
 
     //If on the first question, disable the Previous button.
     document.getElementById("previousQuestion").disabled = true;
@@ -160,7 +166,7 @@ function populateQuestions(testInput, index) {
   }
 
   //Address special case of the last question where you should not be able to move forward. This will also be the end state trigger.
-  if(currentQuesitonNumber == Object.keys(testInput).length){
+  if(currentQuestionNumber == Object.keys(testInput).length){
 
     //If on the last question, disable the next button. End state.
     document.getElementById("nextQuestion").disabled = true;
@@ -174,33 +180,108 @@ function populateQuestions(testInput, index) {
 
 }
 
+//Function to clear checkboxes.
+function clearCheckBoxes(){
+  let answers  = document.getElementsByClassName("answerOptions");
+  for (let i = 0; i < answers.length; i++) {
+    
+    if(answers[i].checked){
+      answers[i].checked = false;
+    }
+
+  }
+}
+
+//Array to hold inventory results.
+let  resultsArray = [];
+//Function to collect current answers and place them in an array.
+function collectAnswers(inventoryResults){
+
+  //Grab the current question to store with user response.
+  let answeredQuestion = currentTest[currentQuestionNumber].split('|')[0];
+  //Grab the current state of the answer checkboxes as an array of elements with class answerOptions.
+  let answerOptions  = document.getElementsByClassName("answerOptions");
+  //Initialize an empty array to hold just the checked boxes values (user provided answers.)
+  let questionAnswer = [];
+
+  //Loop through the current answer options and push the selected answers to the questionAnswer array.
+  for(let i = 0; i < answerOptions.length; i++){ 
+    if(answerOptions[i].checked){
+      questionAnswer.push(answerOptions[i].value)
+    }
+  }
+
+  //If the inventoryResults array is empty (starting state)... 
+  if(inventoryResults.length == 0){
+    //...push the selected answers from the first question to results with the question number and text.
+    inventoryResults.push([currentQuestionNumber, answeredQuestion, questionAnswer]);
+
+  //if the inventoryResults array isn't empty...
+  }else{
+    //...check to see if the current question (if the user moved back) has already been answered.
+    if(inventoryResults.find(el => el[0] === currentQuestionNumber)){
+     
+      //Update the response with the user changed answers. 
+      inventoryResults[currentQuestionNumber-1] = [currentQuestionNumber, answeredQuestion, questionAnswer];
+
+    //Otherwise if this question has not been answered... 
+    }else{
+      //...push the selected answers from the first question to results with the question number and text.
+      inventoryResults.push([currentQuestionNumber, answeredQuestion, questionAnswer]);
+
+    }
+
+  }
+  console.log(inventoryResults);
+}
+
 //Function to move to next question, to be called onClick on Next button. //Event handlers to be moved out of HTML later.
 function moveToNextQuestion() {
 
-  //When called, add 1 to the currentQuestionNumber.
-  currentQuesitonNumber++;
+  //Collect Answers and push to array.
+  collectAnswers(resultsArray);
+
+  //Add 1 to the currentQuestionNumber.
+  currentQuestionNumber++;
 
   //Re-populate current question with the next questions data.
-  populateQuestions(currentTest, currentQuesitonNumber);
+  populateQuestions(currentTest, currentQuestionNumber);
+
+  //Clear answers.
+  clearCheckBoxes()
 
 }
+
+//Add event listeners for Next button.
+//document.getElementById("nextQuestion").addEventListener("click", function(){ collectAnswers(resultsArray);}); //First save the current answers.
+document.getElementById("nextQuestion").addEventListener("click", moveToNextQuestion); //Then populate the next question.
 
 //Function to move to next question, to be called onClick on Next button. //Event handlers to be moved out of HTML later.
 function moveToPreviousQuestion() {
   
-  //When called, subtract 1 from the current Question number.
-  currentQuesitonNumber--;
+  //Collect Answers and push to array.
+  collectAnswers(resultsArray);
+
+  //Subtract 1 from the current Question number.
+  currentQuestionNumber--;
 
   //Re-populate current question with the next questions data.
-  populateQuestions(currentTest, currentQuesitonNumber);
+  populateQuestions(currentTest, currentQuestionNumber);
+
+  //Clear answers.
+  clearCheckBoxes()
 
 }
+
+//Add event listener for Previous button.
+//document.getElementById("previousQuestion").addEventListener("click", function(){ collectAnswers(resultsArray);}); //First save the current answers.
+document.getElementById("previousQuestion").addEventListener("click", moveToPreviousQuestion); //Then populate the next question.
 
 //Set the currentTest object to the result of the extract questions function. This creates the test object when the user loads the page compiling the questions and answers from hidden HTML elements provided by the CMS.
 let currentTest = extractQuestions();
 
 //Initialize the question index at question 1.
-let currentQuesitonNumber = 1;
+let currentQuestionNumber = 1;
 
 //Start the test by populating the first question and answer sets.
-populateQuestions(currentTest, currentQuesitonNumber);
+populateQuestions(currentTest, currentQuestionNumber);
