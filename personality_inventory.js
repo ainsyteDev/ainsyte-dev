@@ -42,115 +42,132 @@ function populateQuestions(testInput, index) {
   //create an object of the anser check box label options using the class name answerOptions-label.
   let answerOptionLabels = document.getElementsByClassName("answerOptions-label");
 
+  //grab div#answer-inputs wrapper to remove when text only input is desired.
+  let answerInputs = document.getElementById("answer-inputs");
+
   //Toggle answer options based off the number available, must be at least one option, in which case it is assumed that the answer should be free-form text.
   switch(numberOfAnswerOptions) {
 
     //Providing a single answer option (cannot be 0 for now, will update) is equivalent to providing only free-form text as an answer.
     case 1:
+      //remove div.answerInputs so layout doesn't have white space when text only input is requested.
+      answerInputs.style.display = "none";
+      //Update checkboxes.
       answerOptionBoxes[0].value = "";
       answerOptionBoxes[1].value = "";
       answerOptionBoxes[2].value = "";
       answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.visibility = 'hidden';
-      answerOptionBoxes[1].style.visibility = 'hidden';
-      answerOptionBoxes[2].style.visibility = 'hidden';
-      answerOptionBoxes[3].style.visibility = 'hidden';
-      //update labels
+      answerOptionBoxes[0].style.display = "none";
+      answerOptionBoxes[1].style.display = "none";
+      answerOptionBoxes[2].style.display = "none";
+      answerOptionBoxes[3].style.display = "none";
+      //Update labels
       answerOptionLabels[0].innerText = "";
       answerOptionLabels[1].innerText = "";
       answerOptionLabels[2].innerText = "";
       answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.visibility = 'hidden';
-      answerOptionLabels[1].style.visibility = 'hidden';
-      answerOptionLabels[2].style.visibility = 'hidden';
-      answerOptionLabels[3].style.visibility = 'hidden';
+      answerOptionLabels[0].style.display = "none";
+      answerOptionLabels[1].style.display = "none";
+      answerOptionLabels[2].style.display = "none";
+      answerOptionLabels[3].style.display = "none";
       break;
 
     //Providing any other N<=4 will display each answer as a button and the free-form text box. 
     case 2:
+      //makes sure answerInputs div is displayed, will not be if coming from a text only input question.
+      answerInputs.style.display = "block";
       //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
       answerOptionBoxes[2].value = "";
       answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.visibility = 'visible';
-      answerOptionBoxes[1].style.visibility = 'visible';
-      answerOptionBoxes[2].style.visibility = 'hidden';
-      answerOptionBoxes[3].style.visibility = 'hidden';
+      answerOptionBoxes[0].style.display = "inline";
+      answerOptionBoxes[1].style.display = "inline";
+      answerOptionBoxes[2].style.display = "none";
+      answerOptionBoxes[3].style.display = "none";
       //update labels
       answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
       answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
       answerOptionLabels[2].innerText = "";
       answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.visibility = 'visible';
-      answerOptionLabels[1].style.visibility = 'visible';
-      answerOptionLabels[2].style.visibility = 'hidden';
-      answerOptionLabels[3].style.visibility = 'hidden';
+      answerOptionLabels[0].style.display = "inline";
+      answerOptionLabels[1].style.display = "inline";
+      answerOptionLabels[2].style.display = "none";
+      answerOptionLabels[3].style.display = "none";
       break;
 
     case 3:
+      //makes sure answerInputs div is displayed, will not be if coming from a text only input question.
+      answerInputs.style.display = "block";
       //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
       answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
       answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.visibility = 'visible';
-      answerOptionBoxes[1].style.visibility = 'visible';
-      answerOptionBoxes[2].style.visibility = 'visible';
-      answerOptionBoxes[3].style.visibility = 'hidden';
+      answerOptionBoxes[0].style.display = "inline";
+      answerOptionBoxes[1].style.display = "inline";
+      answerOptionBoxes[2].style.display = "inline";
+      answerOptionBoxes[3].style.display = "none";
       //update labels
       answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
       answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
       answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
       answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.visibility = 'visible';
-      answerOptionLabels[1].style.visibility = 'visible';
-      answerOptionLabels[2].style.visibility = 'visible';
-      answerOptionLabels[3].style.visibility = 'hidden';
+      answerOptionLabels[0].style.display = "inline";
+      answerOptionLabels[1].style.display = "inline";
+      answerOptionLabels[2].style.display = "inline";
+      answerOptionLabels[3].style.display = "none";
       break;
 
     case 4:
+      //makes sure answerInputs div is displayed, will not be if coming from a text only input question.
+      answerInputs.style.display = "block";
       //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
       answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
       answerOptionBoxes[3].value = testInput[index].split('|')[1].split(',')[3];
-      answerOptionBoxes[0].style.visibility = 'visible';
-      answerOptionBoxes[1].style.visibility = 'visible';
-      answerOptionBoxes[2].style.visibility = 'visible';
-      answerOptionBoxes[3].style.visibility = 'visible';
+      answerOptionBoxes[0].style.display = "inline";
+      answerOptionBoxes[1].style.display = "inline";
+      answerOptionBoxes[2].style.display = "inline";
+      answerOptionBoxes[3].style.display = "inline";
       //Update labels.
       answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
       answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
       answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
       answerOptionLabels[3].innerText = testInput[index].split('|')[1].split(',')[3];
-      answerOptionLabels[0].style.visibility = 'visible';
-      answerOptionLabels[1].style.visibility = 'visible';
-      answerOptionLabels[2].style.visibility = 'visible';
-      answerOptionLabels[3].style.visibility = 'visible';
+      answerOptionLabels[0].style.display = "inline";
+      answerOptionLabels[1].style.display = "inline";
+      answerOptionLabels[2].style.display = "inline";
+      answerOptionLabels[3].style.display = "inline";
       break;
 
     //Default behavior is to show no buttons and only free-form text input. This would only be in case of error.
     default:
+      //remove div.answerInputs so layout doesn't have white space when text only input is requested.
+      answerInputs.style.display = "none";
       //Update checkboxes.
       answerOptionBoxes[0].value = "";
       answerOptionBoxes[1].value = "";
       answerOptionBoxes[2].value = "";
       answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.visibility = 'hidden';
-      answerOptionBoxes[1].style.visibility = 'hidden';
-      answerOptionBoxes[2].style.visibility = 'hidden';
-      answerOptionBoxes[3].style.visibility = 'hidden';
+      answerOptionBoxes[0].style.display = 'none';
+      answerOptionBoxes[1].style.display = 'none';
+      answerOptionBoxes[2].style.display = 'none';
+      answerOptionBoxes[3].style.display = 'none';
       //Update labels.
       answerOptionLabels[0].innerText = "";
       answerOptionLabels[1].innerText = "";
       answerOptionLabels[2].innerText = "";
       answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.visibility = 'visible';
-      answerOptionLabels[1].style.visibility = 'visible';
-      answerOptionLabels[2].style.visibility = 'hidden';
-      answerOptionLabels[3].style.visibility = 'hidden';
+      answerOptionLabels[0].style.display = 'none';
+      answerOptionLabels[1].style.display = 'none';
+      answerOptionLabels[2].style.display = 'none';
+      answerOptionLabels[3].style.display = 'none';
   }
+
+  //Update question number and progress display.
+  updateQuestionNumberDisplay();
 
   //Address special case of the first question where you should not be able to move back by disabling the Previous button.
   if(currentQuestionNumber == 1){
@@ -232,7 +249,12 @@ function collectAnswers(inventoryResults){
     }
 
   }
-  console.log(inventoryResults);
+}
+
+//Function to display question number / progress.
+function updateQuestionNumberDisplay(){
+  document.getElementById("questionNumberDisplay").innerHTML = currentQuestionNumber; //currentTest[index].split('|')[0];
+  document.getElementById("testLengthDisplay").innerHTML = Object.keys(currentTest).length;
 }
 
 //Function to move to next question, to be called onClick on Next button. //Event handlers to be moved out of HTML later.
@@ -249,11 +271,9 @@ function moveToNextQuestion() {
 
   //Clear answers.
   clearCheckBoxes()
-
 }
 
 //Add event listeners for Next button.
-//document.getElementById("nextQuestion").addEventListener("click", function(){ collectAnswers(resultsArray);}); //First save the current answers.
 document.getElementById("nextQuestion").addEventListener("click", moveToNextQuestion); //Then populate the next question.
 
 //Function to move to next question, to be called onClick on Next button. //Event handlers to be moved out of HTML later.
@@ -274,7 +294,6 @@ function moveToPreviousQuestion() {
 }
 
 //Add event listener for Previous button.
-//document.getElementById("previousQuestion").addEventListener("click", function(){ collectAnswers(resultsArray);}); //First save the current answers.
 document.getElementById("previousQuestion").addEventListener("click", moveToPreviousQuestion); //Then populate the next question.
 
 //Set the currentTest object to the result of the extract questions function. This creates the test object when the user loads the page compiling the questions and answers from hidden HTML elements provided by the CMS.
