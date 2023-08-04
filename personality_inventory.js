@@ -137,7 +137,7 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
       answerOptionBoxes[0].style.display = "inline";
       answerOptionBoxes[1].style.display = "inline";
       answerOptionBoxes[2].style.display = "inline";
-      answerOptionBoxes[3].style.display = "none";
+       answerOptionBoxes[3].style.display = "none";
       //update labels.
       answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
       answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
@@ -291,9 +291,7 @@ let qn = urlSearchParams.get('qn');
 //If a URL param is not supplied, default to question 1, otherwise go to the question number supplied in the URL.
 if(qn !== null){
   var currentQuestionNumber = qn;
-  console.log(qn);
 }else{
-  console.log(null);
   var currentQuestionNumber = 1;
 }
 

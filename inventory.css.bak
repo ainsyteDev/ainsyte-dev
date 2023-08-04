@@ -21,10 +21,6 @@
 #inputForm {
   margin: 0;
 }
-.required:after {
-  content:" *";
-    color: red;
-}
 .inventory-wrapper {
   padding: 20px;
   border-radius: 5px;
@@ -44,9 +40,11 @@
   align-items: center;
   justify-content: space-between;
  width: 100%;
+ margin-bottom: 20px;
 }
 .question-header h3 {
   color: #fff;
+  margin-bottom: 0;
   font-size: 26px;
 }
 #currentQuestion {
@@ -108,20 +106,10 @@ input::before {
     width: 20px;
     height: 20px;
 }
-input[type="checkbox"]:checked::before {
+input:checked::before {
   background-image: url("/assets/images/checked_icon.png");
   background-repeat: no-repeat;
   background-size: contain;
-}
-input[type="radio"] {
-  margin-left: 2px;
-}
-input[type="radio"]::before {
-    border-radius: 50%;
-    top: -0.5px;
-    left: -1.5px;
-    width: 15px;
-    height: 15px;
 }
 label {
  margin: 0 20px 0 5px;
@@ -163,99 +151,8 @@ button[disabled]:hover, button[disabled]:active {
 opacity: 0.2;
 }
 
-
-@media screen and (min-width: 767px) {
-  .answer-inputs {
-    justify-content: flex-start;
-    flex-flow: row nowrap;
-  }
-  .inventory-container textarea {
-    max-height: 80px;
-  }
-}
-
-/* Results Block */
-.results-block {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
-  padding: 0 10px;
-  margin-bottom: 20px;
-}
-.results-block > div {
-  margin-bottom: 10px;
-}
-.select-deep-dive {
-  position: relative;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid #c9c9c9;
-}
-.toggle-title {
-  padding: 0 30px 0 10px;
-}
-.toggle-image {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 7px;
-  right: 5px;
-}
-.select-deep-dive .select-toggle-options {
-  display: none;
-}
-.select-deep-dive.open {
-  border-radius: 5px 5px 0 0;
-}
-.select-deep-dive.open .select-toggle-options {
-  display: block;
-  padding: 10px;
-  padding-top: 20px;
-  position: absolute;
-  top: 25px;
-  left: -1px;
-  background:  white;
-  width: calc(100% + 2px);
-  border-radius: 0 0 5px 5px;
-  border:  1px solid #c9c9c9;
-  border-top:  none;
-  z-index: 1;
-}
-.select-deep-dive.open .toggle-image {
- transform: rotate(90deg);
-}
-@media screen and (min-width: 767px) {
- .results-block {
-  flex-flow: row nowrap;
-  justify-content: space-between;
- }
- .results-block label {
-  margin-right: 0;
- }
-}
-
-/* Terms Block */
-.terms-block {
- padding: 20px;
- margin-bottom: 20px;
- border: 1px solid;
- border-radius: 5px;
-}
-
-.terms-block input::before {
-    content:"";
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    background-color: #fff;
-    border: 1px solid #9C9C9C;
-    border-radius: 5px;
-    width: 15px;
-    height: 15px;
-}
-
 /* Colors */
-/* Block background */
+/* Boc background */
 .green-inventory .inventory-wrapper {
   background: #008080;
 }
@@ -275,7 +172,7 @@ opacity: 0.2;
 .blue-inventory .answer-block {
   border-color: #1c3664;
 }
-/* Checkboxes and radio */
+/* Checkboxes */
 /* green */
 .green-inventory input:checked::before {
     background-color: #008080;
@@ -291,28 +188,7 @@ opacity: 0.2;
     background-color: #1c3664;
     border: 3px solid #1c3664;
 }
-/* Terms block */
-.green-inventory .terms-block {
- background: #00808040;
- border-color: #008080;
-}
-.green-inventory .terms-block a {
- color: #008080;
-}
-.purple-inventory .terms-block {
- background: #a38fc340;
- border-color: #a38fc3;
-}
-.purple-inventory .terms-block a {
- color: #a38fc3;
-}
-.blue-inventory .terms-block {
- background: #1c366440;
- border-color: #1c3664;
-}
-.blue-inventory .terms-block a {
- color: #1c3664;
-}
+
 /* Buttons */
 .green-inventory button {
   color: #008080;
@@ -337,7 +213,45 @@ opacity: 0.2;
   color: #fff;
   background: #1c3664;
 }
+@media screen and (min-width: 767px) {
+  .answer-inputs {
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+  }
+  .inventory-container textarea {
+    max-height: 80px;
+  }
+}
 
+/* Results Block */
+.results-block {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.results-block > div {
+  margin-bottom: 10px;
+}
+.select-toggle-header {
+  position: relative;
+}
+.toggle-title {
+  padding-right: 20px;
+}
+.toggle-image {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+.select-deep-dive .select-toggle-options {
+  display: none;
+}
+.select-deep-dive.open .select-toggle-options {
+  display: block;
+}
 
 /* EXCEPTIONS */
 /* Astrology */
@@ -350,16 +264,7 @@ opacity: 0.2;
 .astrology-form footnote {
   font-size: 10px;
   line-height: 10px;
-  margin: 5px;
-}
-.astrology-form .question-header {
-  flex-flow: column nowrap;
-   align-items: flex-start;
-}
-.astrology-form .question-header p {
- margin: 0;
- color: #fff;
- font-weight: 600;
+  margin-top: 5px;
 }
 @media screen and (min-width: 767px) {
   .astrology-form .answer-inputs {
@@ -371,3 +276,5 @@ opacity: 0.2;
   border: 1px solid #c9c9c9;
   width: 100%;
 }
+
+/* Results block */
