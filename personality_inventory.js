@@ -269,7 +269,7 @@ function moveToNextQuestion() {
   populateQuestions(currentTest, currentQuestionNumber);
 
   //Clear answers.
-  clearCheckBoxes()
+  clearCheckBoxes();
 }
 
 //Get Next button element.
@@ -279,9 +279,6 @@ nextButton.addEventListener("click", moveToNextQuestion); //Then populate the ne
 
 //Set the currentTest object to the result of the extract questions function. This creates the test object when the user loads the page compiling the questions and answers from hidden HTML elements provided by the CMS.
 let currentTest = extractQuestions();
-
-////Initialize the question index at question 1.
-//let currentQuestionNumber = 1;
 
 // Create a URLSearchParams object based on the current URL to skip to a specific question using ?qn=N
 const urlSearchParams = new URLSearchParams(window.location.search);
