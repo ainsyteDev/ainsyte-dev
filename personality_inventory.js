@@ -28,8 +28,83 @@ function updateQuestionNumberDisplay(){
   
   //Get the total number of questions user display element.
   let testLengthDisplay = document.getElementById("testLengthDisplay");
-  //set the totla number of questions user display element to the number of questions in the currentTest obj. 
+  //Set the totla number of questions user display element to the number of questions in the currentTest obj. 
   testLengthDisplay.innerHTML = Object.keys(currentTest).length;
+}
+
+//Function to add checkboxes to the DOM based on the number of question options.
+function addCheckboxes(numDesired){ //#Called by populateQuestions().
+  
+  //Grab the answer-inputs element to add children to or display:none if no checkboxes are desired.
+  let answerInputs = document.getElementById("answer-inputs");
+
+  //For now it will be quicker to just handle the HTML for each checkbox/label combo as a block. 
+
+  let inputCheckboxHTML = [`
+<div>
+<input class="answerOptions" type="checkbox" id="option-1" name="Option One" value="Option One" />
+<label class="answerOptions-label" for="option-1">Option One</label>
+</div>
+`,`
+<div>
+<input class="answerOptions" type="checkbox" id="option-2" name="Option Two" value="Option Two" />
+<label class="answerOptions-label" for="option-2">Option Two</label>
+</div>
+`,`
+<div>
+<input class="answerOptions" type="checkbox" id="option-3" name="Option Three" value="Option Three" />
+<label class="answerOptions-label" for="option-3">Option Three</label>
+</div>
+`,`
+<div>
+<input class="answerOptions" type="checkbox" id="option-4" name="Option Four" value="Option Four" />
+<label class="answerOptions-label" for="option-4">Option Four</label>
+</div>
+`];
+
+  switch(numDesired) {
+    case 1:
+      //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
+      answerInputs.style.display = "none";
+      answerInputs.innerHTML = '';
+
+    break;
+    case 2:
+      //Clear answer inputs.
+      answerInputs.innerHTML = '';
+      //Create and populate answer options.
+      answerInputs.innerHTML += inputCheckboxHTML[0];
+      answerInputs.innerHTML += inputCheckboxHTML[1];
+      //Display the answerInputs element.
+      answerInputs.style.display = "block";
+    break;
+    case 3:
+      //Clear answer inputs.
+      answerInputs.innerHTML = '';
+      //Create and populate answer options.
+      answerInputs.innerHTML += inputCheckboxHTML[0];
+      answerInputs.innerHTML += inputCheckboxHTML[1];
+      answerInputs.innerHTML += inputCheckboxHTML[2];
+      //Display the answerInputs element.
+      answerInputs.style.display = "block";
+    break;
+    case 4:
+      //Clear answer inputs.
+      answerInputs.innerHTML = '';
+      //Create and populate answer options.
+      answerInputs.innerHTML += inputCheckboxHTML[0];
+      answerInputs.innerHTML += inputCheckboxHTML[1];
+      answerInputs.innerHTML += inputCheckboxHTML[2];
+      answerInputs.innerHTML += inputCheckboxHTML[3];
+      //Display the answerInputs element.
+      answerInputs.style.display = "block";
+    break;
+    default:
+      //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
+      answerInputs.style.display = "none";
+      answerInputs.innerHTML = '';
+      console.log("Error. Likely invalid number of answer options.");
+  }
 }
 
 //Function to clear checkboxes. #Called by populateQusetions();
@@ -38,10 +113,10 @@ function clearCheckBoxes(){
   //Grab the answer options objects.
   let answers  = document.getElementsByClassName("answerOptions");
 
-  //loop through them...
+  //Loop through them...
   for (let i = 0; i < answers.length; i++) {
-    //Checking to see if they are checked. 
-    if(answers[i].checked){ //If they are checked...
+    //checking to see if they are checked and...
+    if(answers[i].checked){ //...if they are checked...
       //...uncheck them (reset for next question.)
       answers[i].checked = false;
     }
@@ -67,22 +142,25 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
   let numberOfAnswerOptions = testInput[index].split('|')[1].split(',').length;
 
   //Create an object of the answer check box options using the class name answerOptions. 
-  let answerOptionBoxes = document.getElementsByClassName("answerOptions");
+  //let answerOptionBoxes = document.getElementsByClassName("answerOptions");
 
   //Create an object of the answer check box label options using the class name answerOptions-label.
-  let answerOptionLabels = document.getElementsByClassName("answerOptions-label");
+  //let answerOptionLabels = document.getElementsByClassName("answerOptions-label");
 
   //Grab div#answer-inputs wrapper to remove when text only input is desired.
-  let answerInputs = document.getElementById("answer-inputs");
+  //let answerInputs = document.getElementById("answer-inputs");
 
+  //Add the number of checkboxes needed for the current question.
+  addCheckboxes(numberOfAnswerOptions);
+ 
   //Toggle answer options based off the number available, must be at least one option, in which case it is assumed that the answer should be free-form text.
-  switch(numberOfAnswerOptions) {
+/*  switch(numberOfAnswerOptions) {
 
     //Providing a single answer option (cannot be 0 for now, will update) is equivalent to providing only free-form text as an answer.
     case 1:
       //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
       answerInputs.style.display = "none";
-      //Update checkboxes.
+/*      //Update checkboxes.
       answerOptionBoxes[0].value = "";
       answerOptionBoxes[1].value = "";
       answerOptionBoxes[2].value = "";
@@ -106,6 +184,7 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
     case 2:
       //Make sure answerInputs div is displayed, will not be if coming from a text only input question.
       answerInputs.style.display = "block";
+/*
       //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
@@ -129,6 +208,7 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
     case 3:
       //Make sure answerInputs div is displayed, will not be if coming from a text only input question.
       answerInputs.style.display = "block";
+/*
       //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
@@ -152,6 +232,7 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
     case 4:
       //Make sure answerInputs div is displayed, will not be if coming from a text only input question.
       answerInputs.style.display = "block";
+/*
       //Update checkboxes.
       answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
       answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
@@ -176,6 +257,7 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
     default:
       //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
       answerInputs.style.display = "none";
+/*
       //Update checkboxes.
       answerOptionBoxes[0].value = "";
       answerOptionBoxes[1].value = "";
@@ -195,6 +277,7 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
       answerOptionLabels[2].style.display = "none";
       answerOptionLabels[3].style.display = "none";
   }
+*/
 
   //Update question number and progress display.
   updateQuestionNumberDisplay();
@@ -253,7 +336,7 @@ function collectAnswers(inventoryResults){
       inventoryResults.push([currentQuestionNumber, answeredQuestion, questionAnswer]);
     }
   }
-  console.log(inventoryResults);
+  //console.log(inventoryResults);
 }
 
 //Function to move to next question, to be called onclick of Next button.
