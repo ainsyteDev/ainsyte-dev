@@ -38,14 +38,13 @@ function addCheckboxes(numDesired, testData){ //#Called by populateQuestions().
   //Grab the answer-inputs element to add children to or display:none if no checkboxes are desired.
   let answerInputs = document.getElementById("answer-inputs");
 
-  //For now it will be quicker to just handle the HTML for each checkbox/label combo as a block. 
-
+  //For now it will be quicker to just handle the HTML for each checkbox/label combo as a block.
   let inputCheckboxHTML = [`
 <div>
 <input class="answerOptions" type="checkbox" id="option-1" name="Option One" value="Option One" />
 <label class="answerOptions-label" for="option-1">Option One</label>
 </div>
-`,`
+`, `
 <div>
 <input class="answerOptions" type="checkbox" id="option-2" name="Option Two" value="Option Two" />
 <label class="answerOptions-label" for="option-2">Option Two</label>
@@ -62,45 +61,69 @@ function addCheckboxes(numDesired, testData){ //#Called by populateQuestions().
 </div>
 `];
 
+  //Add / Remove checkboxes as needed depending on the number of answer options for any given test.
   switch(numDesired) {
+
+    //If there's only one answer option, it's assumed to be only free-form text input.
     case 1:
+
       //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
       answerInputs.style.display = "none";
+      //Clear the answerInputs div of content from any previous question.
       answerInputs.innerHTML = '';
-
+      //Remove any previous event listeners.
+      answerInputs.removeEventListener("change", addCheckboxes);
     break;
+
+    //If there are two answer options.
     case 2:
+
       //Clear answer inputs.
       answerInputs.innerHTML = '';
       //Create answer option elements.
       answerInputs.innerHTML += inputCheckboxHTML[0];
       answerInputs.innerHTML += inputCheckboxHTML[1];
-      //Populate question answer options.
+      //Populate answer options.
       answerInputs.childNodes[1].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[0];
       answerInputs.childNodes[1].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[0];
       answerInputs.childNodes[3].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[1];
       answerInputs.childNodes[3].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[1];
-      //Display the answerInputs element.
+      //Display the answerInputs element in case we are coming from a question where it is display:none.
       answerInputs.style.display = "block";
+      //Remove any previous event listeners.
+      answerInputs.removeEventListener("change", addCheckboxes);
+      //Add new event listener for two boxes and pass the checkbox elements to the handler function.
+      answerInputs.addEventListener("change", () => twoCheckboxOptionsBehavior(answerInputs.childNodes[1].childNodes[1], answerInputs.childNodes[3].childNodes[1]));
+
     break;
+
+    //If there are three answer options.
     case 3:
+
       //Clear answer inputs.
       answerInputs.innerHTML = '';
       //Create answer option elements.
       answerInputs.innerHTML += inputCheckboxHTML[0];
       answerInputs.innerHTML += inputCheckboxHTML[1];
       answerInputs.innerHTML += inputCheckboxHTML[2];
-      //Populate question answer options.
+      //Populate answer options.
       answerInputs.childNodes[1].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[0];
       answerInputs.childNodes[1].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[0];
       answerInputs.childNodes[3].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[1];
       answerInputs.childNodes[3].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[1];
       answerInputs.childNodes[5].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[2];
       answerInputs.childNodes[5].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[2];
-      //Display the answerInputs element.
+      //Display the answerInputs element in case we are coming from a question where it is display:none.
       answerInputs.style.display = "block";
+      //Remove any previous event listeners.
+      answerInputs.removeEventListener("change", addCheckboxes);
+      //Add new event listener for three boxes and pass the checkbox elements to the handler function.
+      answerInputs.addEventListener('change', (event) => { if (event.target.type === 'checkbox') { moreThanTwoCheckboxOptionsBehavior(answerInputs, event.target); }});
     break;
+
+    //If there are four answer options.
     case 4:
+
       //Clear answer inputs.
       answerInputs.innerHTML = '';
       //Create answer option elements.
@@ -108,7 +131,7 @@ function addCheckboxes(numDesired, testData){ //#Called by populateQuestions().
       answerInputs.innerHTML += inputCheckboxHTML[1];
       answerInputs.innerHTML += inputCheckboxHTML[2];
       answerInputs.innerHTML += inputCheckboxHTML[3];
-      //Populate question answer options.
+      //Populate answer options.
       answerInputs.childNodes[1].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[0];
       answerInputs.childNodes[1].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[0];
       answerInputs.childNodes[3].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[1];
@@ -117,19 +140,66 @@ function addCheckboxes(numDesired, testData){ //#Called by populateQuestions().
       answerInputs.childNodes[5].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[2];
       answerInputs.childNodes[7].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[3];
       answerInputs.childNodes[7].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[3];
-      //Display the answerInputs element.
+      //Display the answerInputs element in case we are coming from a question where it is display:none.
       answerInputs.style.display = "block";
+      //Remove any previous event listeners.
+      answerInputs.removeEventListener("change", addCheckboxes);
+      //Add new event listener for three boxes and pass the checkbox elements to the handler function.
+      answerInputs.addEventListener('change', (event) => { if (event.target.type === 'checkbox') { moreThanTwoCheckboxOptionsBehavior(answerInputs, event.target); }});
     break;
+
+    //Defaults to free-form text only display and writes an error to console.
     default:
+
       //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
       answerInputs.style.display = "none";
+      //Clear answer options from previous question.
       answerInputs.innerHTML = '';
+      //Remove any previous event listeners.
+      answerInputs.removeEventListener("change", addCheckboxes);
       console.log("Error. Likely invalid number of answer options.");
   }
 }
 
+//Functions to manage checkbox active states.
+//Function to handle only allowing one checked option when two answer options are available.
+function twoCheckboxOptionsBehavior(box1, box2){ //Called from event listener attached in addCheckboxes();
+
+  //If both boxes are checked...
+  if (box1.checked && box2.checked) {
+    //...see if box1 was the last checked...
+    if (box1 === document.activeElement) {  
+        //...if so, uncheck box2...
+        box2.checked = false;
+    } else {
+        //...if not, uncheck box1.
+        box1.checked = false;
+    }
+  }
+}
+
+//Function to handle only allowing two checked options when there are three or four answer options available.
+function moreThanTwoCheckboxOptionsBehavior(parentElement, currentCheckbox) { //Called from event listener attached in addCheckboxes();
+
+  // If the user is unchecking a box, no need to enforce any rules.
+  if (!currentCheckbox.checked) {
+    return;
+  }
+
+  //Grab the checkboxes from answer-inputs element.
+  let checkboxes = Array.from(parentElement.querySelectorAll('input[type="checkbox"]'));
+  //Exclude the current checkbox from count.
+  let checkedBoxes = checkboxes.filter(box => box.checked && box !== currentCheckbox);
+
+  //If more than two checkboxes are checked... 
+  if (checkedBoxes.length >= 2) {
+    //...uncheck the first checked box.
+    checkedBoxes[0].checked = false;
+  }
+}
+
 //Function to clear checkboxes. #Called by populateQusetions();
-function clearCheckBoxes(){
+function clearAnswerOptions(){
 
   //Grab the answer options objects.
   let answers  = document.getElementsByClassName("answerOptions");
@@ -241,7 +311,7 @@ function moveToNextQuestion() {
   populateQuestions(currentTest, currentQuestionNumber);
 
   //Clear answers.
-  clearCheckBoxes();
+  clearAnswerOptions();
 }
 
 //Get Next button element.
