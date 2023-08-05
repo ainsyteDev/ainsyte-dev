@@ -6,7 +6,7 @@ function extractQuestions() { //#Is called to create the variable currentTest ob
   const htmlString = document.documentElement.innerHTML;
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, 'text/html');
-  const pTags = doc.querySelectorAll('section.gh-content p');
+  const pTags = doc.querySelectorAll('div.kg-callout-text');
   const pObject = {};
 
   //Loop through the gathered p tags (questions and answers) and create an indexed object from them.
@@ -33,7 +33,7 @@ function updateQuestionNumberDisplay(){
 }
 
 //Function to add checkboxes to the DOM based on the number of question options.
-function addCheckboxes(numDesired){ //#Called by populateQuestions().
+function addCheckboxes(numDesired, testData){ //#Called by populateQuestions().
   
   //Grab the answer-inputs element to add children to or display:none if no checkboxes are desired.
   let answerInputs = document.getElementById("answer-inputs");
@@ -72,30 +72,51 @@ function addCheckboxes(numDesired){ //#Called by populateQuestions().
     case 2:
       //Clear answer inputs.
       answerInputs.innerHTML = '';
-      //Create and populate answer options.
+      //Create answer option elements.
       answerInputs.innerHTML += inputCheckboxHTML[0];
       answerInputs.innerHTML += inputCheckboxHTML[1];
+      //Populate question answer options.
+      answerInputs.childNodes[1].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[0];
+      answerInputs.childNodes[1].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[0];
+      answerInputs.childNodes[3].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[1];
+      answerInputs.childNodes[3].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[1];
       //Display the answerInputs element.
       answerInputs.style.display = "block";
     break;
     case 3:
       //Clear answer inputs.
       answerInputs.innerHTML = '';
-      //Create and populate answer options.
+      //Create answer option elements.
       answerInputs.innerHTML += inputCheckboxHTML[0];
       answerInputs.innerHTML += inputCheckboxHTML[1];
       answerInputs.innerHTML += inputCheckboxHTML[2];
+      //Populate question answer options.
+      answerInputs.childNodes[1].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[0];
+      answerInputs.childNodes[1].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[0];
+      answerInputs.childNodes[3].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[1];
+      answerInputs.childNodes[3].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[1];
+      answerInputs.childNodes[5].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[2];
+      answerInputs.childNodes[5].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[2];
       //Display the answerInputs element.
       answerInputs.style.display = "block";
     break;
     case 4:
       //Clear answer inputs.
       answerInputs.innerHTML = '';
-      //Create and populate answer options.
+      //Create answer option elements.
       answerInputs.innerHTML += inputCheckboxHTML[0];
       answerInputs.innerHTML += inputCheckboxHTML[1];
       answerInputs.innerHTML += inputCheckboxHTML[2];
       answerInputs.innerHTML += inputCheckboxHTML[3];
+      //Populate question answer options.
+      answerInputs.childNodes[1].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[0];
+      answerInputs.childNodes[1].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[0];
+      answerInputs.childNodes[3].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[1];
+      answerInputs.childNodes[3].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[1];
+      answerInputs.childNodes[5].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[2];
+      answerInputs.childNodes[5].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[2];
+      answerInputs.childNodes[7].childNodes[1].value = testData[currentQuestionNumber].split('|')[1].split(',')[3];
+      answerInputs.childNodes[7].childNodes[3].innerText = testData[currentQuestionNumber].split('|')[1].split(',')[3];
       //Display the answerInputs element.
       answerInputs.style.display = "block";
     break;
@@ -121,6 +142,9 @@ function clearCheckBoxes(){
       answers[i].checked = false;
     }
   }
+
+  //Also clear the text-area.
+  document.getElementById('answerText').value= "";
 }
 
 //Function to populate initial question and answer options to div#currentQuestion, starting at question #1.
@@ -141,143 +165,8 @@ function populateQuestions(testInput, index) { //#Is called on initalization and
   //Get the number of answers associated with the indexed question to decide how many answer options to display.
   let numberOfAnswerOptions = testInput[index].split('|')[1].split(',').length;
 
-  //Create an object of the answer check box options using the class name answerOptions. 
-  //let answerOptionBoxes = document.getElementsByClassName("answerOptions");
-
-  //Create an object of the answer check box label options using the class name answerOptions-label.
-  //let answerOptionLabels = document.getElementsByClassName("answerOptions-label");
-
-  //Grab div#answer-inputs wrapper to remove when text only input is desired.
-  //let answerInputs = document.getElementById("answer-inputs");
-
   //Add the number of checkboxes needed for the current question.
-  addCheckboxes(numberOfAnswerOptions);
- 
-  //Toggle answer options based off the number available, must be at least one option, in which case it is assumed that the answer should be free-form text.
-/*  switch(numberOfAnswerOptions) {
-
-    //Providing a single answer option (cannot be 0 for now, will update) is equivalent to providing only free-form text as an answer.
-    case 1:
-      //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
-      answerInputs.style.display = "none";
-/*      //Update checkboxes.
-      answerOptionBoxes[0].value = "";
-      answerOptionBoxes[1].value = "";
-      answerOptionBoxes[2].value = "";
-      answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.display = "none";
-      answerOptionBoxes[1].style.display = "none";
-      answerOptionBoxes[2].style.display = "none";
-      answerOptionBoxes[3].style.display = "none";
-      //Update labels.
-      answerOptionLabels[0].innerText = "";
-      answerOptionLabels[1].innerText = "";
-      answerOptionLabels[2].innerText = "";
-      answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.display = "none";
-      answerOptionLabels[1].style.display = "none";
-      answerOptionLabels[2].style.display = "none";
-      answerOptionLabels[3].style.display = "none";
-      break;
-
-    //Providing any other N<=4 will display each answer as a button and the free-form text box. 
-    case 2:
-      //Make sure answerInputs div is displayed, will not be if coming from a text only input question.
-      answerInputs.style.display = "block";
-/*
-      //Update checkboxes.
-      answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
-      answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
-      answerOptionBoxes[2].value = "";
-      answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.display = "inline";
-      answerOptionBoxes[1].style.display = "inline";
-      answerOptionBoxes[2].style.display = "none";
-      answerOptionBoxes[3].style.display = "none";
-      //Update labels.
-      answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
-      answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
-      answerOptionLabels[2].innerText = "";
-      answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.display = "inline";
-      answerOptionLabels[1].style.display = "inline";
-      answerOptionLabels[2].style.display = "none";
-      answerOptionLabels[3].style.display = "none";
-      break;
-
-    case 3:
-      //Make sure answerInputs div is displayed, will not be if coming from a text only input question.
-      answerInputs.style.display = "block";
-/*
-      //Update checkboxes.
-      answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
-      answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
-      answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
-      answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.display = "inline";
-      answerOptionBoxes[1].style.display = "inline";
-      answerOptionBoxes[2].style.display = "inline";
-       answerOptionBoxes[3].style.display = "none";
-      //update labels.
-      answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
-      answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
-      answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
-      answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.display = "inline";
-      answerOptionLabels[1].style.display = "inline";
-      answerOptionLabels[2].style.display = "inline";
-      answerOptionLabels[3].style.display = "none";
-      break;
-
-    case 4:
-      //Make sure answerInputs div is displayed, will not be if coming from a text only input question.
-      answerInputs.style.display = "block";
-/*
-      //Update checkboxes.
-      answerOptionBoxes[0].value = testInput[index].split('|')[1].split(',')[0];
-      answerOptionBoxes[1].value = testInput[index].split('|')[1].split(',')[1];
-      answerOptionBoxes[2].value = testInput[index].split('|')[1].split(',')[2];
-      answerOptionBoxes[3].value = testInput[index].split('|')[1].split(',')[3];
-      answerOptionBoxes[0].style.display = "inline";
-      answerOptionBoxes[1].style.display = "inline";
-      answerOptionBoxes[2].style.display = "inline";
-      answerOptionBoxes[3].style.display = "inline";
-      //Update labels.
-      answerOptionLabels[0].innerText = testInput[index].split('|')[1].split(',')[0];
-      answerOptionLabels[1].innerText = testInput[index].split('|')[1].split(',')[1];
-      answerOptionLabels[2].innerText = testInput[index].split('|')[1].split(',')[2];
-      answerOptionLabels[3].innerText = testInput[index].split('|')[1].split(',')[3];
-      answerOptionLabels[0].style.display = "inline";
-      answerOptionLabels[1].style.display = "inline";
-      answerOptionLabels[2].style.display = "inline";
-      answerOptionLabels[3].style.display = "inline";
-      break;
-
-    //Default behavior is to show no buttons and only free-form text input. This would only be in case of error.
-    default:
-      //Remove div.answerInputs so layout doesn't have white space when text only input is requested.
-      answerInputs.style.display = "none";
-/*
-      //Update checkboxes.
-      answerOptionBoxes[0].value = "";
-      answerOptionBoxes[1].value = "";
-      answerOptionBoxes[2].value = "";
-      answerOptionBoxes[3].value = "";
-      answerOptionBoxes[0].style.display = "none";
-      answerOptionBoxes[1].style.display = "none";
-      answerOptionBoxes[2].style.display = "none";
-      answerOptionBoxes[3].style.display = "none";
-      //Update labels.
-      answerOptionLabels[0].innerText = "";
-      answerOptionLabels[1].innerText = "";
-      answerOptionLabels[2].innerText = "";
-      answerOptionLabels[3].innerText = "";
-      answerOptionLabels[0].style.display = "none";
-      answerOptionLabels[1].style.display = "none";
-      answerOptionLabels[2].style.display = "none";
-      answerOptionLabels[3].style.display = "none";
-  }
-*/
+  addCheckboxes(numberOfAnswerOptions, testInput);
 
   //Update question number and progress display.
   updateQuestionNumberDisplay();
@@ -336,7 +225,7 @@ function collectAnswers(inventoryResults){
       inventoryResults.push([currentQuestionNumber, answeredQuestion, questionAnswer]);
     }
   }
-  //console.log(inventoryResults);
+  console.log(inventoryResults);
 }
 
 //Function to move to next question, to be called onclick of Next button.
