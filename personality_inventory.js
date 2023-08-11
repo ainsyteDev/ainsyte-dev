@@ -267,6 +267,8 @@ function collectAnswers(inventoryResults){
   let answerOptions  = document.getElementsByClassName("answerOptions");
   //Initialize an empty array to hold just the checked boxes values (user provided answers.)
   let questionAnswer = [];
+  //Grab the current free-form text response.
+  let textAnswer = document.getElementById("answerText").value;
 
   //Loop through the current answer options and push the selected answers to the questionAnswer array.
   for(let i = 0; i < answerOptions.length; i++){ 
@@ -275,27 +277,21 @@ function collectAnswers(inventoryResults){
     }
   }
 
-  //If the inventoryResults array is empty (starting state)... 
-  if(inventoryResults.length == 0){
-    //...push the selected answers from the first question to results with the question number and text.
-    inventoryResults.push([currentQuestionNumber, answeredQuestion, questionAnswer]);
-
-  //if the inventoryResults array isn't empty...
+  //Push current responses to the results array.
+  inventoryResults.push([currentQuestionNumber, answeredQuestion, questionAnswer, textAnswer]);
+/*
+  console.clear();
+  console.log("Question Number: " + inventoryResults[currentQuestionNumber-1][0]);
+  console.log("Question Text: " + inventoryResults[currentQuestionNumber-1][1]);
+  if (inventoryResults[currentQuestionNumber-1][2].length === 0){
+    console.log("Free-form text response only.");
   }else{
-    //...check to see if the current question (if the user moved back) has already been answered.
-    if(inventoryResults.find(el => el[0] === currentQuestionNumber)){
-     
-      //Update the response with the user changed answers. 
-      inventoryResults[currentQuestionNumber-1] = [currentQuestionNumber, answeredQuestion, questionAnswer];
-
-    //Otherwise if this question has not been answered... 
-    }else{
-
-      //...push the selected answers from the first question to results with the question number and text.
-      inventoryResults.push([currentQuestionNumber, answeredQuestion, questionAnswer]);
+    for(i = 0; i < inventoryResults[currentQuestionNumber-1][2].length; i++){
+    console.log("Selected Answer: " + inventoryResults[currentQuestionNumber-1][2][i]);
     }
   }
-  console.log(inventoryResults);
+  console.log("Free-form text Answer: " + inventoryResults[currentQuestionNumber-1][3]);
+*/
 }
 
 //Function to move to next question, to be called onclick of Next button.
@@ -333,6 +329,15 @@ if(qn !== null){
 }else{
   var currentQuestionNumber = 1;
 }
+
+//Function to compile and send results array to api on form submit.
+function submitResults(results){
+  console.log(results);
+};
+
+//Event handler for click of submit button.
+let submitButton = document.getElementById("btn-submit");
+submitButton.addEventListener("click", () => submitResults(resultsArray));
 
 //Start the test by populating the first question and answer sets.
 populateQuestions(currentTest, currentQuestionNumber);
